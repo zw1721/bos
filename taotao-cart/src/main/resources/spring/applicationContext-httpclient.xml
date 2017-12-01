@@ -1,0 +1,48 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd">
+
+	<!-- 配置连接池管理器 -->
+	<bean id="connectionManager"
+		class="org.apache.http.impl.conn.PoolingHttpClientConnectionManager">
+		<!-- 设置最大连接数 -->
+		<property name="maxTotal" value="${httpclient.maxTotal}" />
+		<!-- 设置每个主机地址的并发数 -->
+		<property name="defaultMaxPerRoute" value="${httpclient.defaultMaxPerRoute}" />
+	</bean>
+
+	<!-- RequestConfig的构建类 -->
+	<bean id="requestConfigBuilder" class="org.apache.http.client.config.RequestConfig.Builder">
+		<!-- 创建连接的最长时间 -->
+		<property name="connectTimeout" value="${httpclient.connectTimeout}" />
+		<!-- 从连接池中获取到连接的最长时间 -->
+		<property name="connectionRequestTimeout" value="${httpclient.connectionRequestTimeout}" />
+		<!-- 数据传输的最长时间 -->
+		<property name="socketTimeout" value="${httpclient.socketTimeout}" />
+		<!-- 提交请求前测试连接是否可用 -->
+		<property name="staleConnectionCheckEnabled" value="${httpclient.staleConnectionCheckEnabled}" />
+	</bean>
+
+	<!-- 配置RequestConfig -->
+	<bean id="requestConfig" factory-bean="requestConfigBuilder"
+		factory-method="build" />
+
+	<!-- 配置HttpClient的构建对象 -->
+	<bean id="httpClientBuilder" class="org.apache.http.impl.client.HttpClientBuilder">
+		<property name="connectionManager" ref="connectionManager" />
+		<property name="defaultRequestConfig" ref="requestConfig" />
+	</bean>
+
+	<!-- 配置HttpClient -->
+	<bean factory-bean="httpClientBuilder" factory-method="build"/>
+	
+	<!-- 配置定时清理无效联接 -->
+	<bean class="com.taotao.common.httpclient.IdleConnectionEvictor">
+		<constructor-arg index="0" ref="connectionManager" />
+	</bean>
+</beans>
