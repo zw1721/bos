@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<script type="text/javascript" src="http://manage.taotao.com/js/jquery-easyui-1.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+	// 这个是验证jQuery是否加载成功
+	alert($);
+	// 这个是验证ajax请求是否成功
+	$.ajax({
+		url:"http://manage.taotao.com/json.jsp",
+		type:"get",
+		dataType:"json",
+		success:function(data){
+			alert(data.num);
+		}
+	});
+</script>
+</body>
+</html>

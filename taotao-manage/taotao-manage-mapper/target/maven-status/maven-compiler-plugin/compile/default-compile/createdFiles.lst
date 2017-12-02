@@ -1,0 +1,5 @@
+com\taotao\manage\mapper\ItemCatMapper.class
+com\taotao\manage\mapper\ContentCategoryMapper.class
+com\taotao\manage\mapper\ItemDescMapper.class
+com\taotao\manage\mapper\ContentMapper.class
+com\taotao\manage\mapper\ItemMapper.class

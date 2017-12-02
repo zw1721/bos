@@ -1,0 +1,4 @@
+com\taotao\search\vo\PageResult.class
+com\taotao\search\service\SearchService.class
+com\taotao\search\vo\Item.class
+com\taotao\search\SearchController.class

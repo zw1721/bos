@@ -1,0 +1,2 @@
+127.0.0.1 - - [02/Oct/2017:18:59:05 +0800] "GET /peer/command/resume HTTP/1.0" 404 989 http-bio-8081-exec-3 4
+127.0.0.1 - - [02/Oct/2017:19:26:20 +0800] "GET / HTTP/1.0" 404 951 http-bio-8081-exec-4 2

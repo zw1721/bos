@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<script type="text/javascript" src="http://manage.taotao.com/js/jquery-easyui-1.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+	// 这个是验证jQuery是否加载成功
+	alert($);
+	
+	// 这个是验证ajax请求是否成功
+	/* $.ajax({
+		url:"http://manage.taotao.com/json.jsp",
+		type:"post",
+		dataType:"jsonp",
+		success:function(data){
+			alert(data.num);
+		}
+	}); */
+	
+	$.getJSON("http://manage.taotao.com/json.jsp",function(data){
+		alert(data.num)
+	});
+	
+	// 提前定义好一个函数，来处理想要的数据。
+	// 在将来一段要加载的JS片段中，调用该函数，传递参数。所以实现参数的传递。这个函数被称为回调函数。
+	function xixi(data){
+		alert(data.num);
+	}
+</script>
+</body>
+</html>
